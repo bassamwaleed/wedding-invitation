@@ -1,337 +1,859 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دعوة زفاف | أحمد وندى</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed & Nada - Engagement Invitation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .font-aref { font-family: 'Aref Ruqaa', serif; }
-    .font-cairo { font-family: 'Cairo', sans-serif; }
-    
-    .door-container { perspective: 1200px; }
-    
-    .door-left, .door-right {
-      transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-      transform-style: preserve-3d;
-    }
-    
-    .door-left { transform-origin: left center; }
-    .door-left.is-open { transform: rotateY(100deg); }
-    
-    .door-right { transform-origin: right center; }
-    .door-right.is-open { transform: rotateY(-100deg); }
-
-    .fade-in-up {
-      animation: fadeInUp 1s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Icon pulse animation */
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .5; transform: scale(1.1); }
-    }
-    .animate-pulse-icon {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-  </style>
-</head>
-<body class="relative min-h-screen bg-[#fcf9f2] text-slate-800 font-cairo">
-
-  <!-- Audio Element -->
-  <audio 
-    id="bg-audio" 
-    src="https://cdn.pixabay.com/download/audio/2022/04/27/audio_67b43b679b.mp3?filename=piano-moment-9835.mp3" 
-    loop
-    preload="auto"
-  ></audio>
-
-  <!-- Doors Animation Overlay -->
-  <div id="doors-overlay" class="door-container fixed inset-0 z-50 flex h-full w-full overflow-hidden bg-black">
-    <!-- Left Door -->
-    <div id="door-left" class="door-left relative w-1/2 h-full bg-[#1e293b] flex items-center justify-end border-r-2 border-[#d4af37]">
-      <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] pointer-events-none"></div>
-      <div class="w-4 h-16 bg-[#d4af37] rounded-l-full mr-4 shadow-lg"></div>
-    </div>
-
-    <!-- Right Door -->
-    <div id="door-right" class="door-right relative w-1/2 h-full bg-[#1e293b] flex items-center justify-start border-l-2 border-[#d4af37]">
-      <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] pointer-events-none"></div>
-      <div class="w-4 h-16 bg-[#d4af37] rounded-r-full ml-4 shadow-lg"></div>
-    </div>
-
-    <!-- Center Button -->
-    <div id="center-button-container" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-700 opacity-100">
-      <button 
-        onclick="handleOpenInvitation()"
-        class="group relative flex flex-col items-center justify-center w-40 h-40 bg-[#1e293b] rounded-full border-4 border-[#d4af37] shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:shadow-[0_0_50px_rgba(212,175,55,0.7)] transition-all duration-300 hover:scale-105 cursor-pointer"
-      >
-        <!-- Heart SVG -->
-        <svg class="text-[#d4af37] w-10 h-10 mb-2 group-hover:animate-pulse-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-        <span class="text-[#d4af37] font-cairo font-bold text-center leading-tight">انقر لعرض<br/>الدعوة</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="max-w-3xl mx-auto min-h-screen flex flex-col bg-white shadow-2xl relative">
-    <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] pointer-events-none"></div>
-    
-    <main class="relative z-10 flex-grow px-4 md:px-6 py-16 flex flex-col items-center text-center pb-24">
-      
-      <!-- Header -->
-      <div class="fade-in-up" style="animation-delay: 1.5s;">
-        <p class="text-xl text-[#d4af37] font-aref mb-4">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
-        <div class="flex items-center justify-center gap-2 mb-8">
-          <div class="h-px w-16 bg-[#d4af37]"></div>
-          <!-- Sparkles SVG -->
-          <svg class="text-[#d4af37] w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-          <div class="h-px w-16 bg-[#d4af37]"></div>
-        </div>
-      </div>
-
-      <div class="fade-in-up mb-8" style="animation-delay: 1.8s;">
-        <p class="text-lg md:text-xl text-slate-600 leading-relaxed mb-2">
-          بكل الحب والود، نتشرف بدعوتكم لمشاركتنا فرحتنا الكبرى
-        </p>
-        <p class="text-lg md:text-xl text-slate-600 font-bold">
-          بمناسبة حفل خطوبتنا
-        </p>
-      </div>
-
-      <!-- Names -->
-      <div class="fade-in-up my-10 relative" style="animation-delay: 2.1s;">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-100/50 via-transparent to-transparent -z-10 rounded-full blur-xl"></div>
-        <h1 class="text-6xl md:text-8xl font-aref text-[#1e293b] leading-tight flex flex-col md:flex-row items-center gap-4 md:gap-8">
-          <span>أحمد</span>
-          <span class="text-4xl md:text-6xl text-[#d4af37]">&</span>
-          <span>ندى</span>
-        </h1>
-      </div>
-
-      <!-- Countdown -->
-      <div class="fade-in-up w-full mt-4 mb-12" style="animation-delay: 2.3s;">
-        <div class="flex items-center justify-center gap-2 mb-6 text-[#d4af37]">
-          <!-- Clock SVG -->
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <h3 class="text-xl font-bold font-cairo">العد التنازلي</h3>
-        </div>
-        <div class="flex justify-center gap-3 md:gap-6 w-full max-w-md mx-auto" dir="ltr">
-          
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 bg-[#1e293b] rounded-xl border-2 border-[#d4af37] flex items-center justify-center shadow-lg mb-2 relative overflow-hidden group">
-              <div class="absolute inset-0 bg-[#d4af37]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span id="val-seconds" class="text-2xl md:text-3xl font-bold text-white relative z-10">0</span>
-            </div>
-            <span class="text-sm font-bold text-slate-600">ثانية</span>
-          </div>
-
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 bg-[#1e293b] rounded-xl border-2 border-[#d4af37] flex items-center justify-center shadow-lg mb-2 relative overflow-hidden group">
-              <div class="absolute inset-0 bg-[#d4af37]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span id="val-minutes" class="text-2xl md:text-3xl font-bold text-white relative z-10">0</span>
-            </div>
-            <span class="text-sm font-bold text-slate-600">دقيقة</span>
-          </div>
-
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 bg-[#1e293b] rounded-xl border-2 border-[#d4af37] flex items-center justify-center shadow-lg mb-2 relative overflow-hidden group">
-              <div class="absolute inset-0 bg-[#d4af37]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span id="val-hours" class="text-2xl md:text-3xl font-bold text-white relative z-10">0</span>
-            </div>
-            <span class="text-sm font-bold text-slate-600">ساعة</span>
-          </div>
-
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 md:w-20 md:h-20 bg-[#1e293b] rounded-xl border-2 border-[#d4af37] flex items-center justify-center shadow-lg mb-2 relative overflow-hidden group">
-              <div class="absolute inset-0 bg-[#d4af37]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              <span id="val-days" class="text-2xl md:text-3xl font-bold text-white relative z-10">0</span>
-            </div>
-            <span class="text-sm font-bold text-slate-600">يوم</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Details -->
-      <div class="fade-in-up w-full space-y-6 max-w-xl mx-auto" style="animation-delay: 2.5s;">
-        <div class="bg-[#1e293b]/5 rounded-2xl p-6 border border-[#d4af37]/20 flex flex-col items-center">
-          <!-- CalendarHeart SVG -->
-          <svg class="w-8 h-8 text-[#d4af37] mb-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M21 14v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7"/><path d="M11.992 15.043a2 2 0 0 1 2.835 0l.173.174l.173-.174a2 2 0 0 1 2.828 2.828l-3.001 3.001l-3.008-3.001a2 2 0 0 1 0-2.828z"/></svg>
-          <h3 class="text-2xl font-aref text-[#1e293b] mb-2">الزمان</h3>
-          <p class="text-2xl font-bold text-[#d4af37] font-cairo tracking-widest">22 / 06 / 2026</p>
-        </div>
+    <style>
+        /* Premium custom styling and fonts integration */
+        .font-serif-luxury {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .font-arabic-luxury {
+            font-family: 'Cairo', sans-serif;
+        }
         
-        <div class="bg-[#1e293b]/5 rounded-2xl p-6 border border-[#d4af37]/20">
-          <h3 class="text-2xl font-aref text-[#d4af37] mb-2">المكان</h3>
-          <p class="text-lg text-slate-700 font-bold mb-1">قاعة القصر الملكي</p>
-          <p class="text-sm md:text-base text-slate-600">داخل مركز شباب بين السرايات</p>
-          <p class="text-sm md:text-base text-slate-600 mb-6">بجانب مترو جامعة القاهرة</p>
-          
-          <a 
-            href="https://maps.app.goo.gl/HhQHce2Eo5xvyjZE8" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 bg-[#1e293b] hover:bg-[#d4af37] text-white py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg w-full md:w-auto"
-          >
-            <!-- MapPin SVG -->
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span class="font-bold text-sm">عرض الموقع على الخريطة</span>
-          </a>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animated wave background */
+        .ocean {
+            height: 5%;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: none;
+        }
+        .wave {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.3" d="M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165.3C672,139,768,117,864,128C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,0,320Z"></path></svg>') repeat-x;
+            position: absolute;
+            top: -150px;
+            width: 6400px;
+            height: 198px;
+            animation: wave 12s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+            transform: translate3d(0, 0, 0);
+        }
+        .wave:nth-of-type(2) {
+            top: -175px;
+            animation: wave 18s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes wave {
+            0% { margin-left: 0; }
+            100% { margin-left: -1600px; }
+        }
+        @keyframes swell {
+            0%, 100% { transform: translate3d(0,-25px,0); }
+            50% { transform: translate3d(0,5px,0); }
+        }
+
+        /* Glassmorphism effects */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #115e59;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 10px;
+        }
+
+        /* Responsive Scaling for the Interactive Envelope Box */
+        @media (max-width: 400px) {
+            #envelope-wrapper {
+                transform: scale(0.85);
+            }
+        }
+        @media (max-width: 340px) {
+            #envelope-wrapper {
+                transform: scale(0.75);
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-arabic-luxury antialiased overflow-x-hidden selection:bg-teal-700 selection:text-white">
+
+    <!-- INTRO LANDING SCREEN (Premium Interactive Envelope) -->
+    <div id="intro-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#102a27] transition-all duration-[2000ms] ease-in-out overflow-hidden">
+        <!-- Ambient Background Lights -->
+        <div class="absolute inset-0 bg-gradient-to-b from-teal-950/40 to-stone-950/95 mix-blend-overlay pointer-events-none"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl"></div>
+
+        <!-- Envelope Main Wrapper -->
+        <div id="envelope-wrapper" class="relative w-[90%] max-w-[380px] h-[480px] flex flex-col items-center justify-center transition-all duration-[2000ms] ease-in-out">
+            
+            <!-- Instructions and Hints with breathing animation -->
+            <div id="intro-hint" class="absolute -top-16 text-center text-amber-100/90 animate-bounce transition-all duration-1000">
+                <span class="text-xs uppercase tracking-[0.25em] font-serif-luxury block mb-1">Engagement Invitation / دعوة خطوبة</span>
+                <p class="text-sm tracking-wider font-light" id="click-to-open">اضغط لفتح الرسالة</p>
+                <i class="fa-solid fa-chevron-down text-xs text-amber-300 mt-2"></i>
+            </div>
+
+            <!-- Envelope Body Frame -->
+            <div id="envelope" class="relative w-full h-[300px] bg-[#163835] rounded-b-3xl shadow-[0_25px_60px_rgba(0,0,0,0.6)] border border-teal-800/40 flex flex-col items-center justify-center transition-all duration-[1500ms] ease-in-out">
+                
+                <!-- 3D Envelope Top Flap (pointing downwards initially) -->
+                <div id="envelope-flap" class="absolute top-0 left-0 w-0 h-0 border-l-[190px] border-l-transparent border-r-[190px] border-r-transparent border-t-[150px] border-t-[#224f4b] origin-top transition-transform duration-[1500ms] ease-in-out z-30" style="left: calc(50% - 190px);"></div>
+                
+                <!-- Left and Right Flap Overlays to create physical envelope look -->
+                <div class="absolute bottom-0 left-0 w-0 h-0 border-l-[190px] border-l-[#1a4440] border-t-[150px] border-t-transparent z-20 rounded-bl-3xl" style="left: 0;"></div>
+                <div class="absolute bottom-0 right-0 w-0 h-0 border-r-[190px] border-r-[#1a4440] border-t-[150px] border-t-transparent z-20 rounded-br-3xl" style="right: 0;"></div>
+                
+                <!-- Bottom Flap Shadow -->
+                <div class="absolute bottom-0 left-0 right-0 h-[150px] bg-[#13322f] rounded-b-3xl z-10"></div>
+
+                <!-- Premium Inner Wedding Card (slides out upwards slowly) -->
+                <div id="envelope-card" class="absolute bottom-4 w-[92%] h-[260px] bg-[#fdfdfb] rounded-2xl shadow-lg z-10 transition-all duration-[2000ms] ease-in-out flex flex-col items-center justify-center p-6 text-center border border-amber-200/50">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-amber-700/80 font-serif-luxury">Save The Date</span>
+                    <div class="w-8 h-[1px] bg-amber-500/30 my-2"></div>
+                    <h3 class="font-serif-luxury text-2xl font-bold text-teal-950 tracking-widest">AHMED & NADA</h3>
+                    <p class="text-xs text-stone-500 mt-2 font-serif-luxury tracking-widest">22 . 06 . 2026</p>
+                    <div class="mt-4 flex justify-center items-center gap-2">
+                        <span class="text-[9px] uppercase tracking-widest text-teal-800 font-bold">قاعة القصر الملكي</span>
+                    </div>
+                </div>
+
+                <!-- Golden Wax Seal (The Interactive Hotspot) -->
+                <div id="wax-seal" onclick="openWeddingInvitation()" class="absolute top-[75px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 hover:from-amber-400 hover:to-amber-600 rounded-full shadow-[0_10px_25px_rgba(217,119,6,0.5)] flex items-center justify-center cursor-pointer transition-all duration-[1200ms] border-2 border-amber-200/40">
+                    <!-- Wax seal stamp initials (Ahmed & Nada) -->
+                    <div class="w-12 h-12 rounded-full border border-dashed border-amber-100/50 flex items-center justify-center">
+                        <span class="font-serif-luxury font-bold text-base text-amber-50 tracking-wider">A & N</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Elegant Footer Detail inside loading screen -->
+            <div id="intro-footer" class="absolute -bottom-16 text-center text-amber-100/40 text-[9px] uppercase tracking-[0.3em] font-serif-luxury transition-all duration-1000">
+                Cairo, Egypt
+            </div>
+
         </div>
-      </div>
+    </div>
+
+    <!-- Ambient Music Player Element -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Floating Utilities (Music, Language, Custom Creator Link) -->
+    <div class="fixed top-4 right-4 z-50 flex flex-col gap-3">
+        <!-- Language Switcher -->
+        <button onclick="toggleLanguage()" class="w-12 h-12 rounded-full bg-white/90 text-teal-800 hover:bg-teal-800 hover:text-white transition-all duration-300 shadow-lg flex items-center justify-center font-bold text-sm">
+            <span id="lang-btn-text">EN</span>
+        </button>
+        <!-- Music Toggle -->
+        <button id="music-btn" onclick="toggleMusic()" class="w-12 h-12 rounded-full bg-white/90 text-teal-800 hover:bg-teal-800 hover:text-white transition-all duration-300 shadow-lg flex items-center justify-center text-lg">
+            <i class="fa-solid fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Floating WhatsApp Creator Button (Left Side) -->
+    <div class="fixed top-4 left-4 z-50">
+        <a href="https://wa.me/201286094595?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D9%8A%D8%A9%20%D9%85%D8%AB%D9%84%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%A3%D8%AD%D9%85%D8%AF%20%D9%88%D9%86%D8%AF%D9%89" target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-3 rounded-full shadow-lg transition-all transform hover:scale-105 active:scale-95 text-xs font-semibold">
+            <i class="fa-brands fa-whatsapp text-lg animate-pulse"></i>
+            <span class="hidden md:inline" id="float-whatsapp-text">صمم دعوتك</span>
+        </a>
+    </div>
+
+    <!-- Quick Navigation (Bottom Bar for Mobile) -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-md glass-card py-3 px-6 rounded-full shadow-2xl flex justify-around items-center text-teal-900 border border-teal-200/30">
+        <a href="#hero" class="flex flex-col items-center hover:text-amber-600 transition-colors duration-200">
+            <i class="fa-solid fa-heart text-base mb-1"></i>
+            <span class="text-[10px] uppercase tracking-wider" id="nav-home">البداية</span>
+        </a>
+        <a href="#countdown-sec" class="flex flex-col items-center hover:text-amber-600 transition-colors duration-200">
+            <i class="fa-solid fa-clock text-base mb-1"></i>
+            <span class="text-[10px] uppercase tracking-wider" id="nav-count">العداد</span>
+        </a>
+        <a href="#schedule" class="flex flex-col items-center hover:text-amber-600 transition-colors duration-200">
+            <i class="fa-solid fa-calendar-day text-base mb-1"></i>
+            <span class="text-[10px] uppercase tracking-wider" id="nav-time">البرنامج</span>
+        </a>
+        <a href="#location-sec" class="flex flex-col items-center hover:text-amber-600 transition-colors duration-200">
+            <i class="fa-solid fa-map-location-dot text-base mb-1"></i>
+            <span class="text-[10px] uppercase tracking-wider" id="nav-location-btn">الموقع</span>
+        </a>
+        <a href="#rsvp" class="flex flex-col items-center hover:text-amber-600 transition-colors duration-200">
+            <i class="fa-solid fa-envelope-open-text text-base mb-1"></i>
+            <span class="text-[10px] uppercase tracking-wider" id="nav-rsvp">تأكيد الحضور</span>
+        </a>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="w-full">
+
+        <!-- 1. HERO / COVER SECTION (Inspired by Image 2) -->
+        <section id="hero" class="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden" style="background: linear-gradient(135deg, #0d9488, #0f766e, #115e59);">
+            <!-- Decorative Subtle Overlay -->
+            <div class="absolute inset-0 bg-black/10 z-0"></div>
+            
+            <!-- Beautiful shoreline water effect at bottom -->
+            <div class="absolute bottom-0 left-0 right-0 h-40 overflow-hidden pointer-events-none z-10">
+                <div class="ocean">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </div>
+
+            <!-- Top spacing / elegant logo -->
+            <div class="z-20 pt-16 flex flex-col items-center">
+                <span class="text-xs uppercase tracking-[0.2em] font-serif-luxury text-amber-200/80 mb-2">The Engagement Celebration</span>
+                <div class="w-10 h-[1px] bg-amber-200/50"></div>
+            </div>
+
+            <!-- Middle - Save The Date core visual -->
+            <div class="z-20 text-center px-4 max-w-lg select-none">
+                <!-- Save The Date Title -->
+                <h1 class="font-serif-luxury text-6xl md:text-8xl font-light tracking-wide leading-tight text-white drop-shadow-md mb-6 animate-pulse">
+                    Save <br>
+                    <span class="italic text-amber-200">the</span> <br>
+                    Date
+                </h1>
+
+                <!-- Date display with premium divider -->
+                <div class="my-6">
+                    <p class="font-serif-luxury text-3xl tracking-widest text-white/95" id="wedding-date-str">22.06.2026</p>
+                    <div class="flex justify-center items-center gap-3 my-2">
+                        <div class="w-12 h-[1px] bg-amber-200/40"></div>
+                        <i class="fa-solid fa-heart text-amber-400 text-xs"></i>
+                        <div class="w-12 h-[1px] bg-amber-200/40"></div>
+                    </div>
+                </div>
+
+                <!-- Names of Bride & Groom -->
+                <h2 class="font-serif-luxury text-4xl md:text-5xl tracking-widest text-amber-100 font-semibold mb-4" id="couple-names">
+                    AHMED & NADA
+                </h2>
+
+                <p class="text-xs md:text-sm tracking-wider uppercase font-serif-luxury text-teal-100 opacity-90 max-w-xs mx-auto" id="celebrate-text">
+                    We can't wait to celebrate with you
+                </p>
+            </div>
+
+            <!-- Bottom - Elegant Nautical Accent (Octopus icon from Image 2) -->
+            <div class="z-20 pb-36 flex flex-col items-center text-amber-200/80">
+                <div class="w-16 h-[1px] bg-amber-200/30 mb-3"></div>
+                <i class="fa-solid fa-ring text-2xl hover:scale-110 transition-transform duration-300"></i>
+                <span class="text-[10px] uppercase tracking-widest mt-1 text-amber-100/60 font-serif-luxury">Ocean Breeze & Love Stories</span>
+            </div>
+        </section>
+
+
+        <!-- 2. COUNTDOWN & WELCOME NOTE SECTION (With Ahmed & Nada customization) -->
+        <section id="countdown-sec" class="relative py-24 px-6 bg-[#eae8e4] flex flex-col items-center justify-center text-stone-800">
+            <!-- Vintage floral/baroque divider -->
+            <div class="mb-12 text-center text-stone-500 flex flex-col items-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-xl text-teal-800"></i>
+                <h3 class="font-serif-luxury text-2xl tracking-widest uppercase font-semibold text-teal-900" id="countdown-title">Counting the moments</h3>
+                <div class="w-20 h-[1.5px] bg-amber-600/40 mt-1"></div>
+            </div>
+
+            <!-- Dynamic Countdown Container -->
+            <div class="grid grid-cols-3 gap-6 max-w-md w-full text-center px-4 mb-16">
+                <!-- Days Card -->
+                <div class="flex flex-col items-center py-4 px-2 rounded-2xl bg-white/40 border border-stone-200 shadow-sm">
+                    <span id="countdown-days" class="font-serif-luxury text-4xl md:text-5xl font-light text-teal-900">00</span>
+                    <span class="text-xs tracking-wider text-stone-500 uppercase mt-2" id="label-days">أيام</span>
+                </div>
+                <!-- Hours Card -->
+                <div class="flex flex-col items-center py-4 px-2 rounded-2xl bg-white/40 border border-stone-200 shadow-sm">
+                    <span id="countdown-hours" class="font-serif-luxury text-4xl md:text-5xl font-light text-teal-900">00</span>
+                    <span class="text-xs tracking-wider text-stone-500 uppercase mt-2" id="label-hours">ساعات</span>
+                </div>
+                <!-- Minutes Card -->
+                <div class="flex flex-col items-center py-4 px-2 rounded-2xl bg-white/40 border border-stone-200 shadow-sm">
+                    <span id="countdown-mins" class="font-serif-luxury text-4xl md:text-5xl font-light text-teal-900">00</span>
+                    <span class="text-xs tracking-wider text-stone-500 uppercase mt-2" id="label-mins">دقائق</span>
+                </div>
+            </div>
+
+            <!-- Welcoming Letter Box -->
+            <div class="max-w-xl text-center px-6 py-10 bg-white/60 rounded-3xl border border-stone-300/50 shadow-md backdrop-blur-sm">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-amber-700/80 font-bold mb-2 block" id="welcome-note-sub">A NOTE TO YOU</span>
+                <h4 class="font-serif-luxury text-3xl italic text-teal-950 mb-6" id="welcome-note-title">Welcome, dear guest</h4>
+                <div class="w-12 h-[1px] bg-stone-300 mx-auto mb-6"></div>
+                <p class="text-stone-600 leading-relaxed max-w-md mx-auto text-sm md:text-base mb-4" id="welcome-note-text">
+                    بقلوب تملؤها البهجة والامتنان، ندعوكم لمشاركتنا حفل خطوبتنا وبداية رحلتنا معاً. يسعدنا تواجدكم بجانبنا لنرسم ذكريات لا تُنسى في قاعة القصر الملكي.
+                </p>
+                <i class="fa-solid fa-quote-right text-stone-300 text-lg mt-2"></i>
+            </div>
+        </section>
+
+
+        <!-- 3. TIMELINE / PROGRAM SECTION (Tailored for Egyptian Engagement) -->
+        <section id="schedule" class="py-24 px-4 bg-stone-100 flex flex-col items-center text-stone-800 relative">
+            
+            <div class="mb-16 text-center flex flex-col items-center gap-2">
+                <i class="fa-solid fa-handshake-simple text-xl text-teal-800"></i>
+                <h3 class="font-serif-luxury text-2xl tracking-widest uppercase font-semibold text-teal-900" id="schedule-title">برنامج يومنا الموعود</h3>
+                <div class="w-20 h-[1.5px] bg-amber-600/40 mt-1"></div>
+            </div>
+
+            <!-- Timeline wrapper -->
+            <div class="max-w-lg w-full flex flex-col gap-10 px-2">
+                
+                <!-- Timeline Slot 1 -->
+                <div class="group relative bg-white/70 hover:bg-white transition-all duration-300 rounded-3xl p-8 border border-stone-200/80 shadow-md hover:shadow-xl flex flex-col gap-4">
+                    <!-- Top Ribbon -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="font-serif-luxury text-2xl font-light text-amber-600 tracking-wider">7:00 PM</span>
+                        <span class="p-2 rounded-full bg-amber-50 text-amber-600 text-sm"><i class="fa-solid fa-door-open"></i></span>
+                    </div>
+                    <!-- Details -->
+                    <h4 class="font-serif-luxury text-xl font-semibold text-teal-950" id="event1-title">الاستقبال والترحيب</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="event1-desc">
+                        نبدأ يومنا السعيد بالترحيب بجميع الأهل والأصدقاء ومشاركتنا لحظات اللقاء الأولى وبداية مراسم الحفل.
+                    </p>
+                </div>
+
+                <!-- Timeline Slot 2 -->
+                <div class="group relative bg-white/70 hover:bg-white transition-all duration-300 rounded-3xl p-8 border border-stone-200/80 shadow-md hover:shadow-xl flex flex-col gap-4">
+                    <!-- Top Ribbon -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="font-serif-luxury text-2xl font-light text-amber-600 tracking-wider">8:30 PM</span>
+                        <span class="p-2 rounded-full bg-amber-50 text-amber-600 text-sm"><i class="fa-solid fa-ring"></i></span>
+                    </div>
+                    <!-- Details -->
+                    <h4 class="font-serif-luxury text-xl font-semibold text-teal-950" id="event2-title">تقديم الشبكة وتلبيس الدبل</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="event2-desc">
+                        لحظة تقديم دبل الخطوبة ومشاركة فرحة كتب العهد والارتباط السعيد وتلبيس الشبكة للعروسين وسط الأهل والأحباب.
+                    </p>
+                </div>
+
+                <!-- Timeline Slot 3 -->
+                <div class="group relative bg-white/70 hover:bg-white transition-all duration-300 rounded-3xl p-8 border border-stone-200/80 shadow-md hover:shadow-xl flex flex-col gap-4">
+                    <!-- Top Ribbon -->
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <span class="font-serif-luxury text-2xl font-light text-amber-600 tracking-wider">10:00 PM</span>
+                        <span class="p-2 rounded-full bg-amber-50 text-amber-600 text-sm"><i class="fa-solid fa-music"></i></span>
+                    </div>
+                    <!-- Details -->
+                    <h4 class="font-serif-luxury text-xl font-semibold text-teal-950" id="event3-title">الاحتفال والرقص</h4>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="event3-desc">
+                        سهرة غنائية مميزة مليئة بالبهجة والمرح مع الأغاني والاحتفالات المبهجة لمشاركة أحمد وندى فرحتهم حتى نهاية الليلة السعيدة.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- NEW: 4. VENUE LOCATION CARD WITH GOOGLE MAPS LINK -->
+        <section id="location-sec" class="py-24 px-6 bg-stone-50 flex flex-col items-center text-stone-800">
+            <div class="mb-12 text-center flex flex-col items-center gap-2">
+                <i class="fa-solid fa-map-location-dot text-2xl text-teal-800"></i>
+                <h3 class="font-serif-luxury text-2xl tracking-widest uppercase font-semibold text-teal-900" id="location-title">مكان الحفل</h3>
+                <div class="w-20 h-[1.5px] bg-amber-600/40 mt-1"></div>
+            </div>
+
+            <div class="max-w-md w-full bg-white rounded-3xl border border-stone-200 shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl">
+                <!-- Location Accent Header -->
+                <div class="bg-gradient-to-r from-teal-800 to-teal-900 py-6 px-8 text-white relative">
+                    <div class="absolute right-4 top-4 text-white/10 text-5xl"><i class="fa-solid fa-location-dot"></i></div>
+                    <h4 class="font-serif-luxury text-2xl font-semibold text-amber-200">قاعة القصر الملكي</h4>
+                    <p class="text-xs text-teal-100/90 tracking-wider mt-1" id="location-subtitle">الوصول السهل للقاعة</p>
+                </div>
+                <!-- Card Body -->
+                <div class="p-8 text-center flex flex-col items-center gap-6">
+                    <div class="w-16 h-16 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-2xl animate-pulse">
+                        <i class="fa-solid fa-map-pin"></i>
+                    </div>
+                    <p class="text-stone-600 text-base leading-relaxed font-semibold px-4" id="location-desc">
+                        قاعة القصر الملكي - داخل مركز شباب بين السرايات - بجانب مترو جامعة القاهرة
+                    </p>
+                    
+                    <div class="w-full h-[1px] bg-stone-100"></div>
+
+                    <!-- CTA Map Button -->
+                    <a href="https://maps.app.goo.gl/HhQHce2Eo5xvyjZE8" target="_blank" class="w-full py-4 bg-teal-800 hover:bg-teal-900 active:bg-teal-950 text-white font-bold tracking-wider rounded-2xl shadow-md transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-compass text-amber-300"></i>
+                        <span id="location-btn">عرض الموقع على الخريطة</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 5. RSVP INTERACTIVE FORM SECTION -->
+        <section id="rsvp" class="py-24 px-6 bg-teal-900 text-white relative overflow-hidden">
+            <!-- Soft organic gold waves in bg -->
+            <div class="absolute -top-10 -right-10 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-teal-500/20 rounded-full blur-2xl"></div>
+
+            <div class="max-w-md mx-auto relative z-10 flex flex-col items-center">
+                <!-- Title & Header -->
+                <div class="text-center mb-10">
+                    <i class="fa-solid fa-envelope-open-text text-3xl text-amber-300 mb-3"></i>
+                    <h3 class="font-serif-luxury text-3xl font-light text-amber-100" id="rsvp-title">تأكيد الحضور</h3>
+                    <p class="text-teal-100 text-xs mt-2 uppercase tracking-widest font-serif-luxury" id="rsvp-subtitle">Kindly reply by June 15, 2026</p>
+                    <div class="w-16 h-[1px] bg-amber-300/40 mx-auto mt-4"></div>
+                </div>
+
+                <!-- Form UI Box -->
+                <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="w-full bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 shadow-xl flex flex-col gap-6">
+                    
+                    <!-- Guest Name -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-teal-100" id="label-fullname">الاسم الكامل للمدعوين</label>
+                        <input type="text" id="guest-name" required class="w-full py-3 px-4 rounded-xl bg-white/15 text-white border border-white/20 focus:outline-none focus:border-amber-300 focus:bg-white/25 transition-all text-center" placeholder="اكتب اسمك هنا...">
+                    </div>
+
+                    <!-- Attendance Selection -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-teal-100 text-center" id="label-attendance">هل ستتمكن من الحضور؟</label>
+                        <div class="grid grid-cols-2 gap-4 mt-1">
+                            <button type="button" onclick="selectAttendance(true)" id="btn-accept" class="py-3 rounded-xl border border-white/20 hover:border-amber-300 focus:outline-none bg-white/10 hover:bg-white/20 transition-all font-semibold flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-check text-green-400"></i>
+                                <span id="label-yes">بكل سرور سأحضر</span>
+                            </button>
+                            <button type="button" onclick="selectAttendance(false)" id="btn-decline" class="py-3 rounded-xl border border-white/20 hover:border-amber-300 focus:outline-none bg-white/10 hover:bg-white/20 transition-all font-semibold flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-xmark text-red-400"></i>
+                                <span id="label-no">أعتذر عن الحضور</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Number of Guests -->
+                    <div class="flex flex-col gap-2" id="guests-count-container">
+                        <label class="text-sm text-teal-100" id="label-guests">عدد المرافقين (بمن فيهم أنت)</label>
+                        <div class="flex justify-center items-center gap-4 bg-white/15 rounded-xl py-2 px-4 border border-white/20">
+                            <button type="button" onclick="changeGuestCount(-1)" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-lg focus:outline-none">-</button>
+                            <span id="guest-count-val" class="font-bold text-xl w-10 text-center">1</span>
+                            <button type="button" onclick="changeGuestCount(1)" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-lg focus:outline-none">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Personal Note / Greetings -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-teal-100" id="label-note">رسالة تهنئة للعروسين</label>
+                        <textarea id="guest-note" rows="3" class="w-full py-3 px-4 rounded-xl bg-white/15 text-white border border-white/20 focus:outline-none focus:border-amber-300 focus:bg-white/25 transition-all" placeholder="اكتب مباركتك الخاصة للعروسين هنا..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 mt-2 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-teal-950 font-bold tracking-wider rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span id="label-submit">إرسال الرد</span>
+                    </button>
+                </form>
+
+                <!-- Custom Modal / Message Box for RSVP responses instead of alerts -->
+                <div id="rsvp-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <div class="bg-white text-stone-800 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl flex flex-col items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl mb-2">
+                            <i class="fa-solid fa-heart-circle-check"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-teal-950" id="modal-title">شكراً لك!</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed" id="modal-desc">
+                            تم استلام ردك بنجاح. يسعدنا مشاركتك لنا هذه اللحظات الرائعة. نتطلع لرؤيتك!
+                        </p>
+                        <button onclick="closeModal()" class="mt-4 px-8 py-2 bg-teal-800 hover:bg-teal-900 text-white font-semibold rounded-xl shadow transition-colors">
+                            إغلاق
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- NEW: 6. CREATOR CTA SECTION (Contact on WhatsApp to build templates) -->
+        <section id="creator-cta" class="py-20 px-6 bg-[#eae8e4] text-stone-800 flex flex-col items-center text-center relative overflow-hidden">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-amber-500/5 rounded-full blur-xl"></div>
+            <div class="max-w-md w-full p-8 rounded-3xl bg-white border border-stone-200/80 shadow-xl flex flex-col items-center gap-6 relative z-10">
+                <div class="w-16 h-16 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="font-serif-luxury text-2xl font-bold text-teal-950" id="creator-title">صمم دعوتك التفاعلية الخاصة</h3>
+                <p class="text-stone-600 text-sm leading-relaxed" id="creator-desc">
+                    هل أعجبتك دعوة خطوبة أحمد وندى التفاعلية وتريد تصميم دعوة رقمية فاخرة وخاصة بك لمشاركتها مع أصدقائك؟ تواصل معنا مباشرة عبر الواتساب لتجهيز دعوتك بأعلى جودة!
+                </p>
+                <a href="https://wa.me/201286094595?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D9%8A%D8%A9%20%D9%85%D8%AB%D9%84%20%D8%AF%D8%B9%D9%88%D8%A9%20%D8%A3%D8%AD%D9%85%D8%AF%20%D9%88%D9%86%D8%AF%D9%89" target="_blank" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold tracking-wider rounded-2xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span id="creator-btn">تواصل لتصميم دعوتك الآن</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- 7. FOOTER / ACCENT SECTION -->
+        <footer class="py-16 bg-stone-900 text-stone-400 text-center flex flex-col items-center gap-6 relative overflow-hidden">
+            <div class="w-12 h-[1px] bg-stone-700"></div>
+            
+            <p class="font-serif-luxury text-2xl text-amber-100 italic" id="footer-tagline">
+                The sea takes your words... and gives you peace. 🌊
+            </p>
+
+            <p class="text-xs uppercase tracking-widest text-stone-500 font-serif-luxury">
+                © 2026 Ahmed & Nada. Built with Love.
+            </p>
+        </footer>
 
     </main>
-    
-    <!-- CTA / Footer -->
-    <div class="w-full bg-[#f8fafc] py-8 px-6 flex flex-col items-center justify-center border-t border-[#e2e8f0] mt-auto">
-      <p class="text-slate-700 mb-2 font-bold font-cairo">هل أعجبتك هذه الدعوة؟</p>
-      <p class="text-slate-500 mb-5 text-sm text-center max-w-sm">يمكنك الحصول على دعوة إلكترونية احترافية مشابهة لمناسبتك السعيدة</p>
-      <a
-        href="https://wa.me/201286094595?text=مرحباً، أريد تصميم دعوة إلكترونية مشابهة"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 px-8 rounded-full hover:bg-[#128C7E] transition-transform hover:scale-105 shadow-md font-bold text-sm"
-      >
-        <!-- MessageCircle SVG -->
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-        <span>تواصل معي لطلب تصميم</span>
-      </a>
-    </div>
 
-    <footer class="py-6 text-center text-slate-400 text-sm bg-white border-t border-slate-100">
-      <p id="footer-year"></p>
-    </footer>
+    <!-- JS Logic for interaction, languages, and countdown timer -->
+    <script>
+        // Set the wedding/engagement target date (June 22, 2026 at 7 PM)
+        const weddingDate = new Date("June 22, 2026 19:00:00").getTime();
+        
+        // Multi-Language Strings Database (Ahmed & Nada customized)
+        const translations = {
+            ar: {
+                navHome: "البداية",
+                navCount: "العداد",
+                navTime: "البرنامج",
+                navLocation: "الموقع",
+                navRSVP: "تأكيد الحضور",
+                weddingDateStr: "٢٢ . ٠٦ . ٢٠٢٦",
+                celebrateText: "لا يمكننا الانتظار للاحتفال بخطوبتنا معكم",
+                countdownTitle: "نعد اللحظات والدقائق للموعد المنتظر",
+                welcomeNoteSub: "ملاحظة موجهة إليك",
+                welcomeNoteTitle: "مرحباً بكم يا ضيوفنا الكرام",
+                welcomeNoteText: "بقلوب تملؤها البهجة والامتنان، ندعوكم لمشاركتنا حفل خطوبتنا وبداية رحلتنا معاً. يسعدنا تواجدكم بجانبنا لنرسم ذكريات لا تُنسى في قاعة القصر الملكي.",
+                scheduleTitle: "برنامج يومنا الموعود",
+                event1Title: "الاستقبال والترحيب",
+                event1Desc: "نبدأ يومنا السعيد بالترحيب بجميع الأهل والأصدقاء ومشاركتنا لحظات اللقاء الأولى وبداية مراسم الحفل.",
+                event2Title: "تقديم الشبكة وتلبيس الدبل",
+                event2Desc: "لحظة تقديم دبل الخطوبة ومشاركة فرحة كتب العهد والارتباط السعيد وتلبيس الشبكة للعروسين وسط الأهل والأحباب.",
+                event3Title: "الاحتفال والرقص",
+                event3Desc: "سهرة غنائية مميزة مليئة بالبهجة والمرح مع الأغاني والاحتفالات المبهجة لمشاركة أحمد وندى فرحتهم حتى نهاية الحفل السعيد.",
+                locationTitle: "مكان الحفل",
+                locationSubtitle: "الوصول السهل للقاعة",
+                locationDesc: "قاعة القصر الملكي - داخل مركز شباب بين السرايات - بجانب مترو جامعة القاهرة",
+                locationBtn: "عرض الموقع على الخريطة",
+                rsvpTitle: "تأكيد الحضور",
+                rsvpSubtitle: "يرجى الرد بحلول ١٥ يونيو ٢٠٢٦",
+                labelFullname: "الاسم الكامل للمدعوين",
+                labelAttendance: "هل ستتمكن من الحضور؟",
+                labelYes: "بكل سرور سأحضر",
+                labelNo: "أعتذر عن الحضور",
+                labelGuests: "عدد المرافقين (بمن فيهم أنت)",
+                labelNote: "رسالة تهنئة للعروسين",
+                labelSubmit: "إرسال الرد",
+                modalTitle: "شكراً لك!",
+                modalDesc: "تم استلام ردك بنجاح. يسعدنا مشاركتك لنا هذه اللحظات الرائعة. نتطلع لرؤيتك!",
+                creatorTitle: "صمم دعوتك التفاعلية الخاصة",
+                creatorDesc: "هل أعجبتك دعوة خطوبة أحمد وندى التفاعلية وتريد تصميم دعوة رقمية فاخرة وخاصة بك لمشاركتها مع أصدقائك؟ تواصل معنا مباشرة عبر الواتساب لتجهيز دعوتك بأعلى جودة!",
+                creatorBtn: "تواصل لتصميم دعوتك الآن",
+                floatWhatsappText: "صمم دعوتك",
+                footerTagline: "البحر يأخذ كلماتك.. ويعطيك السلام والسكينة. 🌊",
+                labelDays: "أيام",
+                labelHours: "ساعات",
+                labelMins: "دقائق"
+            },
+            en: {
+                navHome: "Home",
+                navCount: "Countdown",
+                navTime: "Timeline",
+                navLocation: "Location",
+                navRSVP: "RSVP",
+                weddingDateStr: "22 . 06 . 2026",
+                celebrateText: "We can't wait to celebrate our engagement with you",
+                countdownTitle: "Counting the moments",
+                welcomeNoteSub: "A NOTE TO YOU",
+                welcomeNoteTitle: "Welcome, dear guest",
+                welcomeNoteText: "With hearts full of gratitude, we invite you to share in our engagement story and the beginning of our new journey together. We are overjoyed to welcome you to celebrate in the Royal Palace Hall.",
+                scheduleTitle: "Our Engagement Timeline",
+                event1Title: "Guest Welcome",
+                event1Desc: "Starting our happy day with greeting family and friends and gathering for our beautiful beginning.",
+                event2Title: "Ring Exchange & Shabka",
+                event2Desc: "The magical moment of swapping our engagement rings and celebrating our formal binding together with our loved ones.",
+                event3Title: "Dance & Celebrations",
+                event3Desc: "A beautiful music and dance party segment to share Ahmed & Nada's happiness until the end of the night.",
+                locationTitle: "The Venue Location",
+                locationSubtitle: "Easy Venue Access Map",
+                locationDesc: "Royal Palace Hall - Inside Been El-Sarayat Youth Center - Next to Cairo University Metro",
+                locationBtn: "View Location on Google Maps",
+                rsvpTitle: "Confirm Attendance",
+                rsvpSubtitle: "Kindly reply by June 15, 2026",
+                labelFullname: "Full Name of Guest(s)",
+                labelAttendance: "Will you be attending?",
+                labelYes: "Yes, with pleasure!",
+                labelNo: "Regretfully, No",
+                labelGuests: "Number of Guests (including you)",
+                labelNote: "Congratulatory Message",
+                labelSubmit: "Submit Response",
+                modalTitle: "Thank You!",
+                modalDesc: "Your RSVP response has been successfully sent. We are absolutely thrilled to celebrate this day with you!",
+                creatorTitle: "Create Your Custom Interactive Invitation",
+                creatorDesc: "Liked this modern interactive invitation template? You can order and design your own beautiful luxury customized layout today! Chat with us directly on WhatsApp.",
+                creatorBtn: "Order Your Custom Card Now",
+                floatWhatsappText: "Design Yours",
+                footerTagline: "The sea takes your words... and gives you peace. 🌊",
+                labelDays: "Days",
+                labelHours: "Hours",
+                labelMins: "Minutes"
+            }
+        };
 
-    <!-- Floating Audio Toggle Button (Hidden initially) -->
-    <button
-      id="audio-toggle-btn"
-      onclick="toggleAudio()"
-      class="hidden fixed bottom-6 right-6 z-40 bg-white/90 backdrop-blur border border-[#d4af37] p-3 rounded-full shadow-[0_4px_15px_rgba(212,175,55,0.3)] text-[#d4af37] hover:bg-[#d4af37] hover:text-white transition-all duration-300"
-      aria-label="Toggle Music"
-    >
-      <!-- Initial Volume2 Icon (Playing) -->
-      <svg id="icon-playing" class="w-6 h-6 animate-pulse-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-      <!-- Initial VolumeX Icon (Paused) -->
-      <svg id="icon-paused" class="w-6 h-6 hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" x2="15" y1="9" y2="17"/><line x1="15" x2="23" y1="9" y2="17"/></svg>
-    </button>
+        let currentLang = 'ar';
+        let rsvpStatus = null; // true = yes, false = no
+        let guestCount = 1;
 
-  </div>
+        // Interactive Opening Invitation Function (Slow & Smooth Motion)
+        function openWeddingInvitation() {
+            // 1. Play Background Music as a direct consequence of user click (Bypasses Browser Restrictions)
+            const bgMusic = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+            
+            bgMusic.play().then(() => {
+                musicPlaying = true;
+                musicBtn.classList.add('bg-amber-500', 'text-teal-950');
+                musicBtn.classList.remove('bg-white/90', 'text-teal-800');
+                musicBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+            }).catch(e => {
+                console.log("Audio play failed or blocked by browser.", e);
+            });
 
-  <script>
-    // Variables
-    let isPlaying = false;
-    const audioEl = document.getElementById('bg-audio');
-    const toggleBtn = document.getElementById('audio-toggle-btn');
-    const iconPlaying = document.getElementById('icon-playing');
-    const iconPaused = document.getElementById('icon-paused');
+            // 2. Hide Hint/Texts elegantly
+            document.getElementById('intro-hint').classList.add('opacity-0', 'scale-90');
+            document.getElementById('intro-footer').classList.add('opacity-0', 'translate-y-4');
 
-    // Set Footer Year
-    document.getElementById('footer-year').innerHTML = `ألف مبروك للعروسين • ${new Date().getFullYear()}`;
+            // 3. Shrink and rotate the Golden Wax Seal
+            const seal = document.getElementById('wax-seal');
+            seal.style.transform = 'translate(-50%, -50%) scale(0) rotate(360deg)';
+            seal.style.opacity = '0';
 
-    // Target Date for Countdown
-    const targetDate = new Date('2026-06-22T20:00:00').getTime();
+            // 4. Smoothly Rotate Envelope Flap upwards
+            const flap = document.getElementById('envelope-flap');
+            flap.style.transform = 'rotateX(180deg)';
+            
+            // Adjust z-index of flap after it opens so it stays behind the card
+            setTimeout(() => {
+                flap.style.zIndex = '5';
+            }, 600);
 
-    // Countdown Logic
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+            // 5. Slide out the card slowly and majestically
+            const card = document.getElementById('envelope-card');
+            setTimeout(() => {
+                card.style.transform = 'translateY(-130px) scale(1.05)';
+                card.style.boxShadow = '0 25px 50px rgba(0,0,0,0.5)';
+            }, 800);
 
-      if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById('val-days').innerText = '0';
-        document.getElementById('val-hours').innerText = '0';
-        document.getElementById('val-minutes').innerText = '0';
-        document.getElementById('val-seconds').innerText = '0';
-      } else {
-        document.getElementById('val-days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-        document.getElementById('val-hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('val-minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('val-seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000);
-      }
-    }, 1000);
-
-    // Open Invitation and Play Audio
-    function handleOpenInvitation() {
-      // Add 'is-open' class to doors
-      document.getElementById('door-left').classList.add('is-open');
-      document.getElementById('door-right').classList.add('is-open');
-      
-      // Hide center button container
-      const centerBtn = document.getElementById('center-button-container');
-      centerBtn.classList.remove('opacity-100');
-      centerBtn.classList.add('opacity-0', 'pointer-events-none');
-
-      // Play Audio
-      audioEl.volume = 0.5;
-      const playPromise = audioEl.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          isPlaying = true;
-          updateAudioIcon();
-        }).catch(error => {
-          console.error("Auto-play prevented by browser:", error);
-          isPlaying = false;
-          updateAudioIcon();
-        });
-      }
-
-      // Show floating audio toggle button
-      toggleBtn.classList.remove('hidden');
-
-      // Remove doors from DOM visually after animation completes
-      setTimeout(() => {
-        document.getElementById('doors-overlay').style.display = 'none';
-      }, 1500);
-    }
-
-    // Toggle Audio function
-    function toggleAudio() {
-      if (isPlaying) {
-        audioEl.pause();
-        isPlaying = false;
-      } else {
-        const playPromise = audioEl.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.error("Play prevented:", error);
-          });
+            // 6. Smoothly fade away the entire intro screen and zoom into the beautiful wedding site
+            const introScreen = document.getElementById('intro-screen');
+            setTimeout(() => {
+                introScreen.classList.add('opacity-0', 'pointer-events-none', 'scale-110');
+            }, 2500); // 2.5 seconds sequence
         }
-        isPlaying = true;
-      }
-      updateAudioIcon();
-    }
 
-    // Update Audio Button Icon
-    function updateAudioIcon() {
-      if (isPlaying) {
-        iconPlaying.classList.remove('hidden');
-        iconPaused.classList.add('hidden');
-      } else {
-        iconPlaying.classList.add('hidden');
-        iconPaused.classList.remove('hidden');
-      }
-    }
-  </script>
+        // Function to toggle between Arabic and English languages
+        function toggleLanguage() {
+            currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+            
+            // Adjust body fonts based on chosen language to maintain visual excellence
+            if (currentLang === 'ar') {
+                document.body.classList.remove('font-serif-luxury');
+                document.body.classList.add('font-arabic-luxury');
+                document.getElementById('lang-btn-text').innerText = "EN";
+            } else {
+                document.body.classList.remove('font-arabic-luxury');
+                document.body.classList.add('font-serif-luxury');
+                document.getElementById('lang-btn-text').innerText = "عربي";
+            }
+
+            // Update DOM Elements
+            document.getElementById('nav-home').innerText = translations[currentLang].navHome;
+            document.getElementById('nav-count').innerText = translations[currentLang].navCount;
+            document.getElementById('nav-time').innerText = translations[currentLang].navTime;
+            document.getElementById('nav-location-btn').innerText = translations[currentLang].navLocation;
+            document.getElementById('nav-rsvp').innerText = translations[currentLang].navRSVP;
+            
+            document.getElementById('wedding-date-str').innerText = translations[currentLang].weddingDateStr;
+            document.getElementById('celebrate-text').innerText = translations[currentLang].celebrateText;
+            document.getElementById('countdown-title').innerText = translations[currentLang].countdownTitle;
+            document.getElementById('welcome-note-sub').innerText = translations[currentLang].welcomeNoteSub;
+            document.getElementById('welcome-note-title').innerText = translations[currentLang].welcomeNoteTitle;
+            document.getElementById('welcome-note-text').innerText = translations[currentLang].welcomeNoteText;
+            
+            document.getElementById('schedule-title').innerText = translations[currentLang].scheduleTitle;
+            document.getElementById('event1-title').innerText = translations[currentLang].event1Title;
+            document.getElementById('event1-desc').innerText = translations[currentLang].event1Desc;
+            document.getElementById('event2-title').innerText = translations[currentLang].event2Title;
+            document.getElementById('event2-desc').innerText = translations[currentLang].event2Desc;
+            document.getElementById('event3-title').innerText = translations[currentLang].event3Title;
+            document.getElementById('event3-desc').innerText = translations[currentLang].event3Desc;
+            
+            // New Location Elements translations
+            document.getElementById('location-title').innerText = translations[currentLang].locationTitle;
+            document.getElementById('location-subtitle').innerText = translations[currentLang].locationSubtitle;
+            document.getElementById('location-desc').innerText = translations[currentLang].locationDesc;
+            document.getElementById('location-btn').innerText = translations[currentLang].locationBtn;
+
+            document.getElementById('rsvp-title').innerText = translations[currentLang].rsvpTitle;
+            document.getElementById('rsvp-subtitle').innerText = translations[currentLang].rsvpSubtitle;
+            document.getElementById('label-fullname').innerText = translations[currentLang].labelFullname;
+            document.getElementById('label-attendance').innerText = translations[currentLang].labelAttendance;
+            document.getElementById('label-yes').innerText = translations[currentLang].labelYes;
+            document.getElementById('label-no').innerText = translations[currentLang].labelNo;
+            document.getElementById('label-guests').innerText = translations[currentLang].labelGuests;
+            document.getElementById('label-note').innerText = translations[currentLang].labelNote;
+            document.getElementById('label-submit').innerText = translations[currentLang].labelSubmit;
+            
+            // Creator translations
+            document.getElementById('creator-title').innerText = translations[currentLang].creatorTitle;
+            document.getElementById('creator-desc').innerText = translations[currentLang].creatorDesc;
+            document.getElementById('creator-btn').innerText = translations[currentLang].creatorBtn;
+            document.getElementById('float-whatsapp-text').innerText = translations[currentLang].floatWhatsappText;
+
+            document.getElementById('modal-title').innerText = translations[currentLang].modalTitle;
+            document.getElementById('modal-desc').innerText = translations[currentLang].modalDesc;
+            document.getElementById('footer-tagline').innerText = translations[currentLang].footerTagline;
+
+            document.getElementById('label-days').innerText = translations[currentLang].labelDays;
+            document.getElementById('label-hours').innerText = translations[currentLang].labelHours;
+            document.getElementById('label-mins').innerText = translations[currentLang].labelMins;
+        }
+
+        // Countdown Timer Logic
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            // Time calculations for days, hours, and minutes
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Display values inside DOM elements
+            document.getElementById("countdown-days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("countdown-hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("countdown-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
+
+            // If the countdown is finished
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("countdown-days").innerText = "00";
+                document.getElementById("countdown-hours").innerText = "00";
+                document.getElementById("countdown-mins").innerText = "00";
+            }
+        }, 1000);
+
+        // RSVP Selection Helpers
+        function selectAttendance(attending) {
+            rsvpStatus = attending;
+            const btnAccept = document.getElementById('btn-accept');
+            const btnDecline = document.getElementById('btn-decline');
+            const guestContainer = document.getElementById('guests-count-container');
+
+            if (attending) {
+                // Style Active YES
+                btnAccept.classList.add('bg-amber-500', 'text-teal-950', 'border-amber-400');
+                btnAccept.classList.remove('bg-white/10', 'text-white', 'border-white/20');
+                // De-style NO
+                btnDecline.classList.remove('bg-amber-500', 'text-teal-950', 'border-amber-400');
+                btnDecline.classList.add('bg-white/10', 'text-white', 'border-white/20');
+                // Show guests selection
+                guestContainer.classList.remove('hidden');
+            } else {
+                // Style Active NO
+                btnDecline.classList.add('bg-amber-500', 'text-teal-950', 'border-amber-400');
+                btnDecline.classList.remove('bg-white/10', 'text-white', 'border-white/20');
+                // De-style YES
+                btnAccept.classList.remove('bg-amber-500', 'text-teal-950', 'border-amber-400');
+                btnAccept.classList.add('bg-white/10', 'text-white', 'border-white/20');
+                // Hide guests selection
+                guestContainer.classList.add('hidden');
+                guestCount = 1;
+                document.getElementById('guest-count-val').innerText = guestCount;
+            }
+        }
+
+        function changeGuestCount(val) {
+            guestCount = Math.max(1, Math.min(10, guestCount + val));
+            document.getElementById('guest-count-val').innerText = guestCount;
+        }
+
+        // RSVP Submit Logic
+        function handleRSVPSubmit(event) {
+            event.preventDefault();
+            const guestName = document.getElementById('guest-name').value;
+            const guestNote = document.getElementById('guest-note').value;
+
+            if (rsvpStatus === null) {
+                // Prompt user visually instead of browser alert
+                const errorText = currentLang === 'ar' ? 'الرجاء اختيار حالة الحضور أولاً' : 'Please select attendance status first';
+                document.getElementById('btn-accept').classList.add('border-red-400', 'animate-shake');
+                document.getElementById('btn-decline').classList.add('border-red-400', 'animate-shake');
+                setTimeout(() => {
+                    document.getElementById('btn-accept').classList.remove('animate-shake');
+                    document.getElementById('btn-decline').classList.remove('animate-shake');
+                }, 500);
+                return;
+            }
+
+            // Successfully received response data mock
+            console.log("RSVP Submitted:", {
+                name: guestName,
+                attending: rsvpStatus,
+                guests: guestCount,
+                note: guestNote
+            });
+
+            // Show custom success modal
+            document.getElementById('rsvp-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('rsvp-modal').classList.add('hidden');
+            // Reset form
+            document.getElementById('rsvp-form').reset();
+            rsvpStatus = null;
+            guestCount = 1;
+            document.getElementById('guest-count-val').innerText = guestCount;
+            document.getElementById('btn-accept').className = "py-3 rounded-xl border border-white/20 hover:border-amber-300 focus:outline-none bg-white/10 hover:bg-white/20 transition-all font-semibold flex items-center justify-center gap-2";
+            document.getElementById('btn-decline').className = "py-3 rounded-xl border border-white/20 hover:border-amber-300 focus:outline-none bg-white/10 hover:bg-white/20 transition-all font-semibold flex items-center justify-center gap-2";
+            document.getElementById('guests-count-container').classList.remove('hidden');
+        }
+
+        // Custom Music Control
+        let musicPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-btn');
+
+            if (!musicPlaying) {
+                music.play().then(() => {
+                    musicPlaying = true;
+                    btn.classList.add('bg-amber-500', 'text-teal-950');
+                    btn.classList.remove('bg-white/90', 'text-teal-800');
+                    btn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+                }).catch(e => {
+                    console.log("Audio play blocked by browser. User interaction required.");
+                });
+            } else {
+                music.pause();
+                musicPlaying = false;
+                btn.classList.remove('bg-amber-500', 'text-teal-950');
+                btn.classList.add('bg-white/90', 'text-teal-800');
+                btn.innerHTML = `<i class="fa-solid fa-music"></i>`;
+            }
+        }
+    </script>
+
 </body>
 </html>
